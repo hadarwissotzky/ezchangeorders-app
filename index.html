@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EZChangeOrder — create your account</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=DM+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  /* Styled to the main site's system (website/styles.css): Archivo Black display,
+     DM Sans body, ink/paper/olive/mustard tokens, 9px controls, and the site's
+     rotated hard-shadow card. The signup a visitor lands on from the site should
+     read as the same product. Layout stays the inset-card split (hadar,
+     2026-09-08: the brand panel floats, it does not engulf the page). */
+  :root {
+    --ink: #111514;
+    --paper: #f3f0e8;
+    --white: #fffdf8;
+    --olive: #526d3f;
+    --olive-dark: #2c4525;
+    --mustard: #edb91d;
+    --line: #d9d4c9;
+    --muted: #5d625e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; color: var(--ink); background: var(--paper); min-height: 100vh;
+    font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px; line-height: 1.55;
+  }
+  /* Capped and rebalanced (hadar 2026-09-08: "the left side is too wide relative
+     to the registration side") - on ultra-wide screens all spare width was
+     feeding the panel. */
+  .split { display: flex; min-height: 100vh; padding: 26px; gap: 8px; }
+  /* ── the brand panel ── */
+  .side {
+    /* The reference geometry (hadar 2026-09-08): a NARROW brand column hugging
+       the left edge; all remaining width goes to the form side, whose content
+       centers in it. */
+    flex: 0 0 520px; background: var(--olive-dark); color: var(--white); padding: 44px 44px;
+    display: flex; flex-direction: column; border-radius: 24px;
+  }
+  .side .brand { display: flex; align-items: center; gap: 9px; font-weight: 800; font-size: 20px; letter-spacing: -0.04em; }
+  .side .mark {
+    display: grid; place-items: center; width: 38px; height: 38px; border-radius: 8px;
+    background: var(--olive); color: #fff; font-family: "Archivo Black", sans-serif; font-size: 17px;
+  }
+  .side .eyebrow {
+    margin: 56px 0 0; color: #d3dca9; font-size: 13px; font-weight: 800;
+    letter-spacing: 0.15em; text-transform: uppercase;
+  }
+  .side h2 {
+    font-family: "Archivo Black", sans-serif; font-weight: 400; text-transform: uppercase;
+    letter-spacing: -0.055em; line-height: 0.95; font-size: 40px;
+    margin: 18px 0 0;
+    /* Own stacking context, or the underline's z-index:-1 falls behind the olive
+       panel and vanishes (the main site is saved by its entrance animation). */
+    position: relative; z-index: 0;
+  }
+  .side h2 span { position: relative; white-space: nowrap; }
+  .side h2 span::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -4px; height: 11px;
+    background: var(--mustard); z-index: -1; transform: rotate(-1deg);
+  }
+  .proof {
+    margin-top: auto; align-self: flex-start; background: var(--white); color: var(--ink);
+    border-radius: 13px; padding: 26px 28px; max-width: 500px;
+    transform: rotate(1.2deg); box-shadow: 9px 10px 0 var(--mustard);
+  }
+  .proof .row { display: flex; gap: 12px; align-items: flex-start; margin: 0 0 14px; }
+  .proof .row:last-child { margin-bottom: 0; }
+  .proof .n {
+    display: grid; place-items: center; width: 26px; height: 26px; border-radius: 50%;
+    background: var(--olive); flex: none; font-size: 13px; font-weight: 800; color: #fff;
+  }
+  .proof p { margin: 0; font-size: 16px; line-height: 1.5; color: #343936; }
+  .proof b { color: var(--ink); }
+  /* ── the form panel ── */
+  .main { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px 24px; }
+  .box { width: 100%; max-width: 400px; }
+  h1 {
+    font-family: "Archivo Black", sans-serif; font-weight: 400; text-transform: uppercase;
+    letter-spacing: -0.04em; line-height: 1.02; font-size: 30px; margin: 0 0 22px;
+  }
+  .oauth { display: flex; gap: 10px; }
+  .oauth button {
+    flex: 1; min-height: 50px; border: 1px solid var(--line); border-radius: 9px;
+    background: var(--white); color: var(--ink); font: inherit; font-size: 15px; font-weight: 700;
+    cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px;
+  }
+  .oauth button:hover { background: #f6f2e9; }
+  .or {
+    display: flex; align-items: center; gap: 12px; margin: 18px 0;
+    color: var(--muted); font-size: 12px; font-weight: 800; letter-spacing: 0.13em;
+  }
+  .or::before, .or::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  label { display: block; font-size: 13px; font-weight: 800; color: var(--muted); margin: 15px 0 6px; }
+  label:first-of-type { margin-top: 0; }
+  input {
+    width: 100%; font: inherit; font-size: 16px; padding: 13px 14px;
+    border: 1px solid var(--line); border-radius: 9px; background: var(--white); color: var(--ink);
+  }
+  input:focus { outline: 2px solid var(--olive); outline-offset: 1px; }
+  .go {
+    width: 100%; margin-top: 20px; min-height: 56px; border: 0; border-radius: 9px;
+    background: var(--ink); color: #fff; font: inherit; font-size: 17px; font-weight: 800;
+    cursor: pointer; transition: transform 0.2s ease;
+  }
+  .go:hover:enabled { transform: translateY(-2px); }
+  .go:disabled { opacity: 0.45; cursor: default; }
+  .hint { font-size: 13px; color: var(--muted); margin-top: 9px; }
+  .err { color: #9d3b30; background: #f4e2de; border: 1px solid #ddb9b0;
+    border-radius: 9px; padding: 10px 12px; font-size: 14px; margin-top: 14px; display: none; }
+  .fine { font-size: 13px; color: var(--muted); margin-top: 16px; line-height: 1.5; }
+  .fine a { color: var(--olive); }
+  .phonewrap { display: flex; align-items: center; gap: 0; }
+  .phonewrap .cc {
+    display: grid; place-items: center; min-height: 47px; padding: 0 12px;
+    border: 1px solid var(--line); border-right: 0; border-radius: 9px 0 0 9px;
+    background: #ece7db; font-size: 15px; font-weight: 700; color: var(--muted);
+  }
+  .phonewrap input { border-radius: 0 9px 9px 0; }
+  .agree { display: flex; gap: 10px; align-items: flex-start; margin-top: 14px; cursor: pointer; }
+  .agree input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--olive); flex: none; }
+  .agree span { font-size: 13.5px; color: var(--muted); line-height: 1.5; }
+  .agree a { color: var(--olive); }
+  .agree.optin { margin-top: 10px; padding: 12px 13px; background: var(--white);
+    border: 1px solid var(--line); border-radius: 9px; }
+  .tile {
+    display: grid; place-items: center; width: 64px; height: 64px; border-radius: 12px;
+    background: #e7eadd; margin-bottom: 18px;
+  }
+  .appbtn {
+    display: flex; align-items: center; justify-content: center; gap: 13px; text-decoration: none;
+    min-height: 56px; background: var(--ink); color: #fff; border-radius: 9px;
+    font-weight: 800; font-size: 17px; transition: transform 0.2s ease;
+  }
+  .appbtn:hover { transform: translateY(-2px); }
+  .appbtn .dl {
+    display: grid; place-items: center; width: 30px; height: 30px; border-radius: 8px;
+    background: var(--olive); font-size: 18px; font-weight: 900;
+  }
+  .lede { font-size: 17px; color: #343936; margin: 0 0 16px; line-height: 1.5; }
+  .quiet { font-size: 15px; color: var(--muted); margin: 0; line-height: 1.55; }
+  .card {
+    background: var(--white); border: 1px solid var(--line); border-radius: 13px; padding: 22px 20px;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    padding: 11px 16px; border: 1px solid var(--line); border-radius: 999px;
+    background: var(--white); font-size: 15px; font-weight: 600; color: #343936;
+    cursor: pointer; font-family: inherit;
+  }
+  .chip.on { border: 1.5px solid var(--olive-dark); background: #e7eadd;
+    font-weight: 700; color: var(--olive-dark); }
+  .seg { display: flex; gap: 8px; }
+  .seg .chip { flex: 1; border-radius: 9px; text-align: center; min-height: 52px;
+    display: grid; place-items: center; padding: 0 8px; }
+  select.heard {
+    width: 100%; font: inherit; font-size: 16px; padding: 13px 14px;
+    border: 1px solid var(--line); border-radius: 9px; background: var(--white);
+    color: var(--ink); appearance: auto;
+  }
+  .plan {
+    background: var(--white); border: 1px solid var(--line); border-radius: 13px;
+    padding: 18px; margin-top: 12px;
+  }
+  .plan.star { border: 2px solid var(--olive-dark); box-shadow: 6px 7px 0 var(--mustard); }
+  .plan .top { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; }
+  .plan .nm { font-family: "Archivo Black", sans-serif; font-size: 17px; text-transform: uppercase; letter-spacing: -0.02em; }
+  .plan .pr { font-size: 14px; color: var(--muted); font-weight: 600; text-align: right; }
+  .plan p { margin: 8px 0 0; font-size: 14px; color: var(--muted); line-height: 1.5; }
+  .plan .act {
+    margin-top: 12px; display: grid; place-items: center; min-height: 48px;
+    border-radius: 9px; font-size: 15px; font-weight: 800; cursor: pointer;
+    border: 1.5px solid var(--ink); background: var(--white); color: var(--ink);
+  }
+  .plan .act.dark { background: var(--ink); color: #fff; border: 0; }
+  .skiprow { display: flex; justify-content: flex-end; margin-bottom: 4px; }
+  .skiprow a { font-size: 14px; font-weight: 700; color: var(--muted); }
+  /* ── phones: brand strip on top, form under it ── */
+  @media (max-width: 860px) {
+    .split { flex-direction: column; padding: 12px; gap: 0; }
+    .side { border-radius: 18px; padding: 26px 22px 30px; }
+    .side .eyebrow { margin-top: 20px; }
+    .side h2 { margin-top: 12px; font-size: 27px; }
+    .side h2 span::after { bottom: -3px; height: 8px; }
+    .proof { margin-top: 24px; transform: rotate(0.8deg); box-shadow: 6px 7px 0 var(--mustard); }
+    .main { padding: 26px 10px 40px; align-items: flex-start; }
+    h1 { font-size: 23px; }
+  }
+</style>
+</head>
+<body>
+<div class="split">
+
+  <div class="side">
+    <div class="brand">
+      <div class="mark">EZ</div>
+      <span>ChangeOrder</span>
+    </div>
+    <p class="eyebrow">Built for small residential contractors</p>
+    <h2>Extra work, signed before you leave <span>the driveway.</span></h2>
+    <div class="proof">
+      <div class="row"><div class="n">1</div><p><b>Say it or snap it</b> on site. The app writes the change order for you.</p></div>
+      <div class="row"><div class="n">2</div><p><b>Your client gets a text.</b> They read the scope, see the photos, and sign. No app for them.</p></div>
+      <div class="row"><div class="n">3</div><p><b>Every word and photo is kept</b> as evidence. Priced, time-stamped, and signed.</p></div>
+    </div>
+  </div>
+
+  <div class="main">
+    <!-- ── the form ── -->
+    <div class="box" id="form">
+      <h1>Create an account for your company.</h1>
+      <div class="oauth">
+        <button id="google">
+          <svg viewBox="0 0 24 24" style="width:18px;height:18px"><path fill="#4285F4" d="M23.5 12.3c0-.9-.1-1.5-.3-2.2H12v4.1h6.5c-.1 1.1-.8 2.7-2.4 3.8l3.7 2.9c2.2-2 3.7-5 3.7-8.6z"/><path fill="#34A853" d="M12 24c3.2 0 5.9-1.1 7.9-2.9l-3.7-2.9c-1 .7-2.4 1.2-4.2 1.2-3.2 0-5.9-2.1-6.8-5l-3.9 3c2 3.9 6 6.6 10.7 6.6z"/><path fill="#FBBC05" d="M5.2 14.4c-.2-.7-.4-1.5-.4-2.4s.1-1.7.4-2.4l-3.9-3C.5 8.2 0 10 0 12s.5 3.8 1.3 5.4l3.9-3z"/><path fill="#EA4335" d="M12 4.7c1.8 0 3 .8 3.7 1.4l3.3-3.2C17.9 1.1 15.2 0 12 0 7.3 0 3.3 2.7 1.3 6.6l3.9 3c.9-2.9 3.6-4.9 6.8-4.9z"/></svg>
+          Google
+        </button>
+        <button id="apple">
+          <svg viewBox="0 0 24 24" fill="#111514" style="width:18px;height:18px"><path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8.79-.16 2.11-.85 3.6-.72 1.79.14 3.06.85 3.87 2.13-3.42 2.09-2.87 6.53.45 7.87-.65 1.5-1.5 2.98-3 2.89zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+          Apple
+        </button>
+      </div>
+      <div class="or">OR</div>
+      <label for="name">Full name</label>
+      <input id="name" autocomplete="name" placeholder="First and last name">
+      <label for="company">Company</label>
+      <input id="company" autocomplete="organization" placeholder="Your company name">
+      <label for="email">Work email</label>
+      <input id="email" autocomplete="email" inputmode="email" placeholder="you@company.com">
+      <label for="phone">Phone</label>
+      <div class="phonewrap">
+        <span class="cc">+1</span>
+        <input id="phone" autocomplete="tel" inputmode="tel" placeholder="(555) 555-0100">
+      </div>
+      <label class="agree">
+        <input type="checkbox" id="terms">
+        <span>I agree to the <a href="https://approve.ezchangeorders.com/terms.html">Terms</a> and
+          <a href="https://approve.ezchangeorders.com/privacy.html">Privacy Policy</a>.</span>
+      </label>
+      <label class="agree optin">
+        <input type="checkbox" id="optin">
+        <span>Send me product updates and field tips by email or text. Optional — not a
+          condition of anything.</span>
+      </label>
+      <button class="go" id="go" disabled>Get started</button>
+      <div class="hint">One email link. No password to invent or remember.</div>
+      <div class="err" id="err"></div>
+    </div>
+
+    <!-- ── link sent ── -->
+    <div class="box" id="sent" style="display:none">
+      <div class="tile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#2c4525" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:30px;height:30px"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="m2 7 10 6 10-6"/></svg>
+      </div>
+      <h1>Check your email</h1>
+      <p class="lede" id="sentTo">We sent a sign-in link.</p>
+      <p class="quiet">Open it on this device or your phone — either finishes your
+        registration. The link is the password.</p>
+    </div>
+
+    <!-- ── finish your profile (OAuth arrivals skipped the form) ── -->
+    <div class="box" id="finish" style="display:none">
+      <h1>Finish your profile.</h1>
+      <label for="fName">Full name</label>
+      <input id="fName" autocomplete="name" placeholder="First and last name">
+      <label for="fCompany">Company</label>
+      <input id="fCompany" autocomplete="organization" placeholder="Your company name">
+      <label for="fPhone">Phone</label>
+      <div class="phonewrap">
+        <span class="cc">+1</span>
+        <input id="fPhone" autocomplete="tel" inputmode="tel" placeholder="(555) 555-0100">
+      </div>
+      <label class="agree">
+        <input type="checkbox" id="fTerms">
+        <span>I agree to the <a href="https://approve.ezchangeorders.com/terms.html">Terms</a> and
+          <a href="https://approve.ezchangeorders.com/privacy.html">Privacy Policy</a>.</span>
+      </label>
+      <button class="go" id="fGo" disabled>Continue</button>
+      <div class="err" id="fErr"></div>
+      <p class="fine" style="text-align:center"><a href="#" id="fReset">Not you? Start over</a></p>
+    </div>
+
+    <!-- ── about your business ── -->
+    <div class="box" id="about" style="display:none">
+      <h1>About your business.</h1>
+      <label>Your trade</label>
+      <div class="chips" id="tradeChips"></div>
+      <label style="margin-top:18px">Who works with you?</label>
+      <div class="seg" id="crewSeg"></div>
+      <label for="heard" style="margin-top:18px">How did you hear about us?
+        <span style="font-weight:600">(optional)</span></label>
+      <select class="heard" id="heard">
+        <option value="">Choose one</option>
+        <option>A friend or another contractor</option>
+        <option>Search</option>
+        <option>Social media</option>
+        <option>App Store</option>
+        <option>Other</option>
+      </select>
+      <button class="go" id="aGo" disabled>Continue</button>
+      <div class="err" id="aErr"></div>
+      <p class="fine" style="text-align:center"><a href="#" id="aReset">Not you? Start over</a></p>
+    </div>
+
+    <!-- ── how you start ── -->
+    <div class="box" id="plans" style="display:none">
+      <div class="skiprow"><a href="#" id="planSkip">Skip this step</a></div>
+      <h1>Start free. Upgrade when it pays for itself.</h1>
+      <div class="plan">
+        <div class="top"><span class="nm">Free start</span><span class="pr">$0 &#183; the trial &#183; ends by itself</span></div>
+        <p>2 jobs &#183; 2 change orders &#183; 30 photos &#183; 30 min recording. The full flow, nothing held back. No credit card.</p>
+        <div class="act" id="planFree">Start free</div>
+      </div>
+      <div class="plan">
+        <div class="top"><span class="nm">Pay as you go</span><span class="pr">from $2.98 per change order</span></div>
+        <p>No monthly bill. 1 credit = 1 change order sent to sign. 3 for $18 &#183; 20 for $79 &#183; 50 for $149. Trial limits lift with your first pack.</p>
+        <div class="act" id="planPayg">Buy credits when needed</div>
+      </div>
+      <div class="plan star">
+        <div class="top"><span class="nm">Core</span><span class="pr">$19/mo billed annually ($229) &#183; $29 monthly</span></div>
+        <p>Unlimited jobs, change orders, photos and recording &#183; 3 seats &#183; 50 SMS binding signatures a month.</p>
+        <div class="act dark" id="planCore">Start with Core</div>
+      </div>
+      <p class="hint" style="text-align:center; margin-top:14px">One signed change order usually covers a year of Core.</p>
+    </div>
+
+    <!-- ── registered ── -->
+    <div class="box" id="welcome" style="display:none">
+      <div class="tile">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#2c4525" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width:30px;height:30px"><path d="m4 12.5 5 5L20 6.5"/></svg>
+      </div>
+      <h1>You're registered</h1>
+      <p class="lede">Your account is ready. Everything you capture in the app files under it.</p>
+      <div class="card">
+        <p class="quiet" style="margin-bottom:16px">Next: get the app on your phone and sign in
+          the same way — same email, same link method.</p>
+        <a class="appbtn" href="https://testflight.apple.com/join/SxcZppnW"><span class="dl">&#8595;</span>Get the app</a>
+        <p class="hint" style="text-align:center; margin-top:11px; font-weight:600">iPhone today &#183; Android coming</p>
+        <p class="hint" style="text-align:center; margin-top:6px">You'll be redirected to the app or the App Store.
+          No credit card required; the trial ends automatically.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script type="module">
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+
+const SUPABASE_URL = 'https://auth.ezchangeorders.com';
+const ANON_KEY = 'sb_publishable_znCqPzbIkt4L-oaBwQAdQQ_C93zwFMf';
+const supabase = createClient(SUPABASE_URL, ANON_KEY);
+
+const $ = (id) => document.getElementById(id);
+
+const show = (id) => {
+  for (const s of ['form', 'sent', 'finish', 'about', 'plans', 'welcome']) {
+    document.getElementById(s).style.display = s === id ? '' : 'none';
+  }
+};
+
+/**
+ * THE ROUTER (onboarding v2, hadar 2026-09-08). A signed-in visitor sees the
+ * first step their ACCOUNT is still missing - so an OAuth arrival gets the
+ * profile form the four-field page never showed them, a form registrant skips
+ * straight to trade, and a returning visitor lands on Get the app. Every answer
+ * is user_metadata, which the app's first sign-in already restores from.
+ */
+const route = (user) => {
+  const m = user?.user_metadata ?? {};
+  if (!m.full_name || !m.company_name || !m.phone || !m.terms_accepted_at) {
+    if (m.full_name) $('fName').value = m.full_name;
+    if (m.company_name) $('fCompany').value = m.company_name;
+    show('finish'); fReady(); return;
+  }
+  if (!m.trade || !m.crew_size) { show('about'); return; }
+  if (!m.plan_choice) { show('plans'); return; }
+  show('welcome');
+};
+supabase.auth.onAuthStateChange((_ev, session) => { if (session) route(session.user); });
+
+const emailOk = () => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($('email').value.trim());
+// The same four answers the app's own onboarding collects (hadar, 2026-09-08:
+// "registration match the mobile experience -- full name, company, email and
+// phone number"). Phone: ten digits somewhere in whatever punctuation they type.
+const phoneOk = () => ($('phone').value.replace(/\D/g, '').length === 10);
+const ready = () => $('name').value.trim().length >= 2
+  && $('company').value.trim().length >= 2 && emailOk() && phoneOk()
+  && $('terms').checked;
+// US format as they type: (415) 443-2321. Ten digits; the +1 lives in the prefix chip.
+$('phone').addEventListener('input', () => {
+  let d = $('phone').value.replace(/\D/g, '');
+  if (d.length > 10 && d.startsWith('1')) d = d.slice(1);
+  d = d.slice(0, 10);
+  $('phone').value = d.length > 6 ? `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`
+    : d.length > 3 ? `(${d.slice(0,3)}) ${d.slice(3)}` : d;
+});
+for (const id of ['name', 'company', 'email', 'phone']) $(id).addEventListener('input', () => { $('go').disabled = !ready(); });
+$('terms').addEventListener('change', () => { $('go').disabled = !ready(); });
+
+const fail = (msg) => { $('err').textContent = msg; $('err').style.display = 'block'; };
+// Supabase throttles repeat link requests (~60s). That is not a failure the user
+// caused — a link is already on its way — so say that instead of a scary error.
+const isRateLimit = (e) => /after \d+ seconds|security purposes|rate limit|too many/i.test(String(e?.message ?? e ?? ''));
+
+// OAuth first — the same two providers the app itself signs in with.
+const oauth = (provider) => async () => {
+  $('err').style.display = 'none';
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider,
+    // Host-relative on purpose: this page serves at app.ezchangeorders.com (its
+    // home) and approve.../register.html (legacy) - each copy returns to itself.
+    options: { redirectTo: location.origin + location.pathname },
+  });
+  if (error) fail('Could not start ' + provider + ' sign-in — ' + (error.message ?? 'try again.'));
+};
+$('google').addEventListener('click', oauth('google'));
+$('apple').addEventListener('click', oauth('apple'));
+
+/**
+ * NOT A SEND (hadar 2026-09-08: "again just got [check your email] after the
+ * personal info page"). The reference flow asks everything BEFORE verifying;
+ * the form now stashes its answers and advances to About your business. The
+ * one OTP email goes out at the END, carrying every answer as metadata.
+ */
+$('go').addEventListener('click', async () => {
+  if (!ready()) return;
+  $('go').disabled = true; $('err').style.display = 'none';
+  const email = $('email').value.trim();
+  // ONE SEND, HERE, WITH ONLY THE ACCOUNT BASICS. Email verification comes first
+  // (hadar 2026-09-09: "a clear fix for those that never came to the app before").
+  // Trade / crew / plan are collected AFTER the link is clicked, in the signed-in
+  // session, by the router below - so a brand-new account always runs them once,
+  // in order, and there is no answer riding a throttled OTP.
+  const { error } = await supabase.auth.signInWithOtp({
+    email,
+    options: {
+      emailRedirectTo: location.origin + location.pathname,
+      shouldCreateUser: true,
+      data: {
+        full_name: $('name').value.trim(),
+        company_name: $('company').value.trim(),
+        phone: '+1' + $('phone').value.replace(/\D/g, ''),
+        marketing_opt_in: $('optin').checked,
+        terms_accepted_at: new Date().toISOString(),
+        registered_via: 'web',
+      },
+    },
+  });
+  if (error && !isRateLimit(error)) {
+    fail('Could not send the link — ' + (error.message ?? 'try again in a moment.'));
+    $('go').disabled = false; return;
+  }
+  $('sentTo').textContent = 'We sent a sign-in link to ' + email
+    + (error ? ' a moment ago — open it to continue.' : '.');
+  show('sent');
+});
+
+// ── finish-your-profile (the OAuth path's first page) ───────────────────────
+const fPhoneOk = () => ($('fPhone').value.replace(/\D/g, '').length === 10);
+const fReady = () => {
+  const ok = $('fName').value.trim().length >= 2 && $('fCompany').value.trim().length >= 2
+    && fPhoneOk() && $('fTerms').checked;
+  $('fGo').disabled = !ok; return ok;
+};
+$('fPhone').addEventListener('input', () => {
+  let d = $('fPhone').value.replace(/\D/g, '');
+  if (d.length > 10 && d.startsWith('1')) d = d.slice(1);
+  d = d.slice(0, 10);
+  $('fPhone').value = d.length > 6 ? `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`
+    : d.length > 3 ? `(${d.slice(0,3)}) ${d.slice(3)}` : d;
+});
+for (const id of ['fName', 'fCompany', 'fPhone']) $(id).addEventListener('input', fReady);
+$('fTerms').addEventListener('change', fReady);
+$('fGo').addEventListener('click', async () => {
+  if (!fReady()) return;
+  $('fGo').disabled = true;
+  const { data, error } = await supabase.auth.updateUser({ data: {
+    full_name: $('fName').value.trim(),
+    company_name: $('fCompany').value.trim(),
+    phone: '+1' + $('fPhone').value.replace(/\D/g, ''),
+    terms_accepted_at: new Date().toISOString(),
+    registered_via: 'web',
+  }});
+  if (error) { $('fErr').textContent = 'Could not save — ' + error.message; $('fErr').style.display = 'block'; $('fGo').disabled = false; return; }
+  route(data.user);
+});
+
+// ── about your business ─────────────────────────────────────────────────────
+const TRADES = ['General Contractor', 'Remodeling', 'Handyman', 'Plumbing', 'Electrical',
+  'HVAC', 'Roofing', 'Painting', 'Flooring', 'Concrete & Masonry', 'Landscaping',
+  'Carpentry & Framing', 'Other'];
+const CREWS = ['Just me', 'A small crew (2\u20135)', '6 or more'];
+let aTrade = null, aCrew = null;
+const pick = (wrap, items, set) => {
+  for (const label of items) {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.textContent = label;
+    b.addEventListener('click', () => {
+      set(label);
+      for (const c of wrap.children) c.classList.toggle('on', c === b);
+      $('aGo').disabled = !(aTrade && aCrew);
+    });
+    wrap.appendChild(b);
+  }
+};
+pick($('tradeChips'), TRADES, (v) => { aTrade = v; });
+pick($('crewSeg'), CREWS, (v) => { aCrew = v; });
+$('aGo').addEventListener('click', async () => {
+  if (!aTrade || !aCrew) return;
+  const answers = { trade: aTrade, crew_size: aCrew, heard_about: $('heard').value || null };
+  // Always signed-in here (about runs only post-link now). Save and advance.
+  $('aGo').disabled = true;
+  const { data, error } = await supabase.auth.updateUser({ data: answers });
+  if (error) { $('aErr').textContent = 'Could not save — ' + error.message; $('aErr').style.display = 'block'; $('aGo').disabled = false; return; }
+  $('aGo').disabled = false;
+  route(data.user);
+});
+
+// ── how you start. The paid buttons record the intent, then open the purchase
+// page - the same RevenueCat surface the app links out to. ──────────────────
+// Always signed-in here (plans runs only post-link). Record the choice; a paid
+// choice opens the purchase surface, everything else lands on welcome.
+const choosePlan = async (choice, thenHref) => {
+  const { data } = await supabase.auth.updateUser({ data: { plan_choice: choice } });
+  if (thenHref) { location.href = thenHref; return; }
+  route(data?.user ?? (await supabase.auth.getUser()).data.user);
+};
+// Start-over escape: sign out and return to the form. Never let a signed-in but
+// wrong/incomplete visitor be trapped mid-onboarding (hadar 2026-09-09).
+const startOver = async (e) => { e.preventDefault(); try { await supabase.auth.signOut(); } catch {} location.reload(); };
+$('fReset').addEventListener('click', startOver);
+$('aReset').addEventListener('click', startOver);
+$('planSkip').addEventListener('click', (e) => { e.preventDefault(); void choosePlan('skipped', null); });
+$('planFree').addEventListener('click', () => void choosePlan('free', null));
+$('planPayg').addEventListener('click', () => void choosePlan('payg', 'https://approve.ezchangeorders.com/buy.html'));
+$('planCore').addEventListener('click', () => void choosePlan('core', 'https://approve.ezchangeorders.com/buy.html'));
+
+// LAST, after every handler above exists: decide the opening screen.
+//
+// getUser() VALIDATES against the server (unlike getSession, which trusts a
+// possibly-revoked JWT still in localStorage). hadar 2026-09-09: a create-account
+// visit skipped the form and dropped onto "About your business" because the
+// browser held a stale session for a deleted account. A dead/foreign session is
+// signed out and the form shows; a live incomplete account resumes where it left
+// off; a brand-new visitor with no session sees the form.
+{
+  const { data: { user }, error } = await supabase.auth.getUser();
+  if (error || !user) { try { await supabase.auth.signOut(); } catch {} show('form'); }
+  else route(user);
+}
+</script>
+</body>
+</html>
